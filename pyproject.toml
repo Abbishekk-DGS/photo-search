@@ -1,0 +1,42 @@
+[project]
+name = "photo-search"
+version = "0.1.0"
+description = "Search your photo library by meaning: CLIP embeddings for text-to-image and image-to-image search, near-duplicate detection and zero-shot auto-tagging, all offline."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Abbishekk DGS" }]
+requires-python = ">=3.11"
+dependencies = ["open-clip-torch>=2.24", "torch>=2.3", "pillow>=10", "numpy>=1.26"]
+
+[project.urls]
+Homepage = "https://abbishekkdgs.tech"
+Repository = "https://github.com/Abbishekk-DGS/photo-search"
+
+[project.optional-dependencies]
+ui = ["streamlit>=1.50"]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[project.scripts]
+photo-search = "photo_search.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/photo_search"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu", marker = "sys_platform == 'linux'" }]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
