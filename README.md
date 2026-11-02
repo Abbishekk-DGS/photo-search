@@ -7,6 +7,42 @@
 <!-- author-banner -->
 > **Project 04 of 20** in my AI build series, designed and built by **[Abbishekk DGS](https://abbishekkdgs.tech)**. [See all projects →](https://github.com/Abbishekk-DGS)
 
+<!-- overview:start -->
+## Overview
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/overview-dark.svg">
+  <img alt="photo-search overview: how it works and its output. Key numbers: 4 sample queries, top hits shown; 1 / 1 planted duplicate found; 4 prompt templates per query; ViT-B-32 on an 8 GB Mac. Stack: Python · OpenCLIP · PyTorch · union-find · Streamlit · CUDA / MPS / CPU." src="docs/overview-light.svg" width="100%">
+</picture>
+
+## Interface
+
+You can use it from the terminal or from a gallery app in the browser.
+
+### Terminal
+
+| Command | What it does | Options (default) |
+|---|---|---|
+| `photo-search index <folder>` | Embeds new or changed photos and drops deleted ones | |
+| `photo-search search "<text>"` | Finds photos from a description | `-k` (10) |
+| `photo-search similar <image>` | Finds photos like this one | `-k` (10) |
+| `photo-search dupes` | Finds near-duplicates | `--threshold` (0.95) |
+| `photo-search tag` | Auto-tags with your labels or a built-in list | `--labels`, `--json` |
+
+These go before the command: `--index`, `--model` (default `ViT-B-32`) and `--pretrained`.
+
+### Gallery app
+
+Install it with `uv sync --extra ui`, then start it with `uv run streamlit run src/photo_search/app.py`.
+
+| Area | Controls |
+|---|---|
+| Sidebar | Folder to index, **Index folder**, number of results (6 to 60), number of columns (3 to 8) |
+| Search by text tab | "Describe the photo" box and a photo grid |
+| Search by image tab | Upload a photo to find similar ones |
+| Duplicates tab | Similarity threshold (0.85 to 0.99), **Find near-duplicates**, grouped results |
+<!-- overview:end -->
+
 ## Features
 
 - **Text → image search** with CLIP prompt ensembling ("a photo of …", "a picture of …"), which makes queries more robust than a bare phrase
